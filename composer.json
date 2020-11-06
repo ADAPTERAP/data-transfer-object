@@ -1,0 +1,31 @@
+{
+    "name": "adapterap/data-transfer-object",
+    "type": "library",
+    "require": {
+        "php": ">=7.4",
+        "illuminate/database": "^7.0",
+        "illuminate/support": "^7.0",
+        "illuminate/container": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adapterap\\DataTransferObject\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ADAPTERAP",
+            "email": "ab@adapterap.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "description": ""
+}
