@@ -9,14 +9,14 @@ use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Collection as BaseEloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Collection as BaseSupportCollection;
 use RuntimeException;
 use stdClass;
 
-class BaseCollection extends EloquentCollection implements Makeable
+class EloquentCollection extends BaseEloquentCollection implements Makeable
 {
     /**
      * Имя класса, с которым работает коллекция.
@@ -28,11 +28,11 @@ class BaseCollection extends EloquentCollection implements Makeable
     /**
      * Добавляет в конец коллекции несколько элементов.
      *
-     * @param EloquentCollection $collection
+     * @param BaseEloquentCollection $collection
      *
-     * @return BaseCollection
+     * @return BaseEloquentCollection
      */
-    public function pushMany(EloquentCollection $collection): BaseCollection
+    public function pushMany(BaseEloquentCollection $collection): BaseEloquentCollection
     {
         $collection->each(function ($item) {
             $this->push($item);
@@ -46,9 +46,9 @@ class BaseCollection extends EloquentCollection implements Makeable
      *
      * @param string $class
      *
-     * @return SupportCollection
+     * @return BaseSupportCollection
      */
-    public function mapInto($class): SupportCollection
+    public function mapInto($class): BaseSupportCollection
     {
         if ($class !== $this->className) {
             return $this->toBase()->mapInto($class);
@@ -79,11 +79,11 @@ class BaseCollection extends EloquentCollection implements Makeable
      * @param int          $count
      * @param null|Closure $closure
      *
-     * @throws ClosureIsRequiredForFakeMethod
+     * @return BaseEloquentCollection|static
+     *@throws ClosureIsRequiredForFakeMethod
      *
-     * @return BaseCollection|static
      */
-    public static function fake(int $count = 5, Closure $closure = null): BaseCollection
+    public static function fake(int $count = 5, Closure $closure = null): BaseEloquentCollection
     {
         $result = new static();
 
@@ -160,7 +160,7 @@ class BaseCollection extends EloquentCollection implements Makeable
             return $item;
         }
 
-        if ($item instanceof SupportCollection) {
+        if ($item instanceof BaseSupportCollection) {
             return new static($item->all());
         }
 

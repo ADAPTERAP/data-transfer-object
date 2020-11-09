@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Adapterap\DataTransferObject\BaseCollection;
+use Adapterap\DataTransferObject\EloquentCollection;
 use Adapterap\DataTransferObject\Entity;
 use Adapterap\DataTransferObject\Support\Str;
 use PHPUnit\Framework\TestCase;
@@ -98,7 +98,7 @@ class ChildAbstractEntity extends Entity
     public int $someNumber;
 }
 
-class ChildAbstractCollection extends BaseCollection
+class ChildAbstractCollection extends EloquentCollection
 {
     /**
      * Имя класса, с которым работает коллекция.
