@@ -7,7 +7,6 @@ use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Database\Eloquent\Collection as BaseEloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use RuntimeException;
@@ -25,11 +24,11 @@ trait CollectionTrait
     /**
      * Добавляет в конец коллекции несколько элементов.
      *
-     * @param CollectionTrait $collection
+     * @param CollectionContract $collection
      *
-     * @return CollectionTrait
+     * @return CollectionContract
      */
-    public function pushMany(CollectionTrait $collection): CollectionTrait
+    public function pushMany(CollectionContract $collection): self
     {
         $collection->each(function ($item) {
             $this->push($item);
@@ -43,9 +42,9 @@ trait CollectionTrait
      *
      * @param string $class
      *
-     * @return CollectionTrait
+     * @return CollectionContract
      */
-    public function mapInto($class): CollectionTrait
+    public function mapInto($class)
     {
         if ($class !== $this->className) {
             return $this->toBase()->mapInto($class);
@@ -76,11 +75,11 @@ trait CollectionTrait
      * @param int $count
      * @param null|Closure $closure
      *
-     * @return CollectionTrait|static
+     * @return CollectionContract|static
      * @throws ClosureIsRequiredForFakeMethod
      *
      */
-    public static function fake(int $count = 5, Closure $closure = null): CollectionTrait
+    public static function fake(int $count = 5, Closure $closure = null): self
     {
         $result = new static();
 

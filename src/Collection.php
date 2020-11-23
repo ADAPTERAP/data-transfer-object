@@ -4,7 +4,7 @@ namespace Adapterap\DataTransferObject;
 
 use Illuminate\Support\Collection as BaseSupportCollection;
 
-class Collection extends BaseSupportCollection implements Makeable
+class Collection extends BaseSupportCollection implements Makeable, CollectionContract
 {
     use CollectionTrait;
 }
