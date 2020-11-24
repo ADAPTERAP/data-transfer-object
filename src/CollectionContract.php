@@ -2,6 +2,7 @@
 
 namespace Adapterap\DataTransferObject;
 
+use Adapterap\DataTransferObject\Exceptions\ClosureIsRequiredForFakeMethod;
 use Closure;
 
 interface CollectionContract

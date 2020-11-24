@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use RuntimeException;
 use stdClass;
 
@@ -26,7 +27,7 @@ trait CollectionTrait
      *
      * @param CollectionContract $collection
      *
-     * @return CollectionContract
+     * @return CollectionTrait|Collection|EloquentCollection|static
      */
     public function pushMany(CollectionContract $collection): self
     {
@@ -42,15 +43,28 @@ trait CollectionTrait
      *
      * @param string $class
      *
-     * @return CollectionContract
+     * @return CollectionContract|Collection|EloquentCollection|static
      */
-    public function mapInto($class)
+    public function mapInto($class): CollectionContract
     {
         if ($class !== $this->className) {
             return $this->toBase()->mapInto($class);
         }
 
         return parent::mapInto($class);
+    }
+
+    /**
+     * Get the values of a given key.
+     *
+     * @param string|array|int|null $value
+     * @param string|null $key
+     *
+     * @return CollectionContract|Collection|EloquentCollection|static
+     */
+    public function pluck($value, $key = null): CollectionTrait
+    {
+        return $this->toBase()->pluck($value, $key);
     }
 
     /**
@@ -75,7 +89,7 @@ trait CollectionTrait
      * @param int $count
      * @param null|Closure $closure
      *
-     * @return CollectionContract|static
+     * @return CollectionContract|Collection|EloquentCollection|static
      * @throws ClosureIsRequiredForFakeMethod
      *
      */
