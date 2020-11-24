@@ -45,7 +45,7 @@ trait CollectionTrait
      *
      * @return CollectionContract|Collection|EloquentCollection|static
      */
-    public function mapInto($class): CollectionContract
+    public function mapInto($class)
     {
         if ($class !== $this->className) {
             return $this->toBase()->mapInto($class);
@@ -62,7 +62,7 @@ trait CollectionTrait
      *
      * @return CollectionContract|Collection|EloquentCollection|static
      */
-    public function pluck($value, $key = null): CollectionTrait
+    public function pluck($value, $key = null)
     {
         return $this->toBase()->pluck($value, $key);
     }
