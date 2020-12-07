@@ -16,13 +16,6 @@ use stdClass;
 trait CollectionTrait
 {
     /**
-     * Имя класса, с которым работает коллекция.
-     *
-     * @var null|string
-     */
-    protected ?string $className = null;
-
-    /**
      * Добавляет в конец коллекции несколько элементов.
      *
      * @param CollectionContract $collection

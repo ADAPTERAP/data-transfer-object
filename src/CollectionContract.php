@@ -14,7 +14,7 @@ interface CollectionContract
      *
      * @return CollectionContract
      */
-    public function pushMany(CollectionContract $collection): self;
+    public function pushMany(CollectionContract $collection);
 
     /**
      * Map the values into a new class.
@@ -35,5 +35,5 @@ interface CollectionContract
      *
      * @throws ClosureIsRequiredForFakeMethod
      */
-    public static function fake(int $count = 5, Closure $closure = null): self;
+    public static function fake(int $count = 5, Closure $closure = null);
 }
