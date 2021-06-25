@@ -2,6 +2,8 @@
 
 namespace Adapterap\DataTransferObject;
 
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Adapterap\DataTransferObject\Support\Str;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -167,7 +169,13 @@ abstract class Entity implements Arrayable, Makeable
             } elseif (is_a($typeName, Makeable::class, true)) {
                 $done = true;
                 $property->setValue($this, $typeName::makeable($value));
+            } elseif (is_a($typeName, CarbonInterface::class, true)) {
+                $done = true;
+                $property->setValue($this, $typeName::parse($value));
             }
+        } elseif ($typeName === CarbonInterface::class) {
+            $done = true;
+            $property->setValue($this, Carbon::parse($value));
         }
 
         if (!$done) {
